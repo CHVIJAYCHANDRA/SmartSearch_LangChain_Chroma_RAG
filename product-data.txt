@@ -1,0 +1,64 @@
+# Northwind Devices - Internal Product Knowledge Base
+# Last updated: 2025-03-14
+# Audience: support engineers, solutions team
+
+## ND-100 Edge Gateway
+
+The ND-100 is our entry-level industrial edge gateway. It ships with 4 GB RAM,
+a quad-core ARM Cortex-A53, and two gigabit Ethernet ports. It supports Modbus
+TCP and MQTT out of the box. Maximum sustained throughput is 800 messages per
+second. Operating temperature range is -20C to 60C. The ND-100 does not include
+onboard TPM, so it is not approved for deployments that require hardware-backed
+attestation. List price is 480 USD. Standard warranty is 24 months.
+
+## ND-200 Edge Gateway
+
+The ND-200 is the successor to the ND-100. It has 8 GB RAM, a six-core CPU, and
+adds an onboard TPM 2.0 module, which makes it suitable for regulated
+deployments. Maximum sustained throughput is 2,400 messages per second, roughly
+three times the ND-100. It supports Modbus TCP, MQTT, and OPC-UA. Operating
+temperature range is -40C to 70C. List price is 910 USD. Standard warranty is
+36 months. The ND-200 is pin-compatible with ND-100 mounting brackets, so field
+upgrades do not require new enclosures.
+
+## Firmware and update policy
+
+All gateways run NorthwindOS, a Yocto-based Linux distribution. Firmware updates
+are delivered as signed A/B images, so a failed update rolls back automatically
+on next boot. Security patches are published on the first Tuesday of each month.
+The ND-100 receives security patches until December 2026. The ND-200 receives
+security patches until December 2029. Customers on the Extended Support plan get
+an additional 24 months beyond those dates.
+
+## Licensing
+
+The base firmware licence is perpetual and included in the hardware price. The
+OPC-UA protocol pack is a separate subscription at 120 USD per device per year,
+and is only available on the ND-200. The Fleet Manager cloud console is licensed
+per site: 1,200 USD per year for up to 50 devices, 4,000 USD per year for up to
+500 devices. There is no free tier, but a 30-day evaluation licence is available
+on request.
+
+## Support tiers
+
+Standard support covers email response within one business day, 09:00-17:00 CET.
+Priority support covers 24/7 phone and email with a four-hour response target,
+and costs 18 percent of hardware list price annually. Priority support is
+required for any customer running more than 200 devices in production. On-site
+hardware replacement is available in the EU and North America only, with a
+next-business-day target.
+
+## Known issues
+
+Under firmware 4.2.1, ND-200 units running OPC-UA and MQTT simultaneously can
+exhaust file descriptors after approximately 14 days of uptime, causing new
+connections to be refused. The workaround is to raise the descriptor limit to
+16384 or schedule a weekly service restart. This is fixed in firmware 4.2.3.
+ND-100 units are not affected because they do not support OPC-UA.
+
+## Return policy
+
+Unopened hardware may be returned within 30 days for a full refund. Opened
+hardware carries a 15 percent restocking fee. Units that have had firmware
+downgraded below 4.0 are not eligible for return, because the downgrade path
+does not preserve the secure-boot key slots.
